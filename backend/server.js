@@ -2,13 +2,23 @@ import express from 'express';
 import authRoutes from "./routes/auth_routes.js"
 import dotenv from 'dotenv'
 import connectMongoDB from './Database/connectMongoDB.js';
-import { connect } from 'mongoose';
-const app=express();
-
-app.use("/api/auth",authRoutes)
+import cookieParser from 'cookie-parser';
 
 dotenv.config();
-const PORT=process.env.PORT || 5000;
+
+const app=express();
+
+
+//middlewer
+app.use(express.json());//to parse req.body
+app.use(express.urlencoded({ extended: true }));//to parse from data(urlencoded)
+
+
+app.use(cookieParser());//This pasre the request. so would get the cookies
+
+app.use("/api/auth",authRoutes);
+
+const PORT=process.env.PORT;
 
 
 app.listen(PORT,()=>{
