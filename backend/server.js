@@ -3,6 +3,7 @@ import { v2 as cloudinary } from "cloudinary";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 
+import postRoutes from './routes/post_routes.js'
 import authRoutes from "./routes/auth_routes.js";
 import userRoutes from "./routes/user_routes.js";
 import connectMongoDB from "./Database/connectMongoDB.js";
@@ -25,6 +26,7 @@ app.use(cookieParser()); //This pasre the request. so would get the cookies
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
+app.use("/api/auth/posts",postRoutes)
 
 const PORT = process.env.PORT;
 
