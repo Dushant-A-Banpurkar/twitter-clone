@@ -1,7 +1,8 @@
 import express from 'express'
 import {getMe, login, logout, signup} from "../controllers/auth_controller.js"
 import { protectRoute } from '../middleware/protectRoute.js';
-protectRoute
+
+
 const router=express.Router();
 
 //protectRoute for protection

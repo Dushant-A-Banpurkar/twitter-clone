@@ -28,6 +28,7 @@
     "tailwind-merge": "^2.3.0"
   },
   "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
     "autoprefixer": "^10.4.19",
     "daisyui": "^4.12.2",
     "nodemon": "^3.1.3",
