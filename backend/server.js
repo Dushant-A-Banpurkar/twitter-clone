@@ -19,8 +19,9 @@ cloudinary.config({
   api_secret: process.env.CLOUDNARY_API_SECRET,
 });
 
-//middlewer
-app.use(express.json()); //to parse req.body
+//middlewer sections
+app.use(express.json({limit:"10mb"})); //to parse req.body
+//limit is increase.because we can't upload image by default
 app.use(express.urlencoded({ extended: true })); //to parse from data(urlencoded)
 
 app.use(cookieParser()); //This pasre the request. so would get the cookies
