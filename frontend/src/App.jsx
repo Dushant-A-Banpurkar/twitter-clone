@@ -14,27 +14,21 @@ function App() {
   const {
     data: authUser,
     isLoading,
-    // error,
-    // isError,
+    error,
+    isError,
   } = useQuery({
     queryKey: ["authUser"],
     queryFn: async () => {
-      try {
-        const res = await fetch("/api/auth/me", {
-          credentials: "include",
-        });
-        const data = await res.json();
-        if(data.error) return null;
-        if (!res.ok || data.error) {
-          throw new Error(data.error || "Something went wrong");
-        }
-        return data;
-      } catch (error) {
-        throw new Error(error);
+      const res = await fetch("/api/auth/me", {
+        credentials: "include",
+      });
+      const data = await res.json();
+      if (data.error) return null;
+      if (!res.ok) {
+        throw new Error("Network response was not ok");
       }
+      return data;
     },
-    retry: false, // Disable automatic retries to avoid unnecessary requests
-    refetchOnWindowFocus: false, // Do not refetch on window focus to avoid unnecessary requests
   });
 
   if (isLoading) {
@@ -44,6 +38,14 @@ function App() {
       </div>
     );
   }
+  if (isError) {
+    return (
+      <div className="h-screen flex justify-center items-center">
+        <p>Error: {error.message}</p>
+      </div>
+    );
+  }
+
   return (
     <div className="flex max-w-6xl mx-auto">
       {authUser && <Sidebar />}
